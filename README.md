@@ -1,14 +1,14 @@
 # RV32I Single-Cycle Processor
 
-A single-cycle RISC-V processor written in Verilog, implementing the complete **RV32I base integer instruction set**. Designed from scratch as a learning project — every module is hand-written, no IP cores or generated code.
+A single-cycle RISC-V processor written in Verilog, implementing the complete **RV32I base integer instruction set**. Designed from scratch as a learning project. Every module is hand-written, no IP cores or generated code.
 
 ![Top-level block diagram](docs/block_diagram_top.png)
 
 ## Features
 
-- **Single-cycle execution** — one instruction completes every clock cycle
-- **Harvard architecture** — separate instruction and data memories
-- **Full RV32I support** — all 37 base integer instructions:
+- **Single-cycle execution** - one instruction completes every clock cycle
+- **Harvard architecture** - separate instruction and data memories
+- **Full RV32I support** - all 37 base integer instructions:
   - Arithmetic: `ADD`, `SUB`, `ADDI`
   - Logic: `AND`, `OR`, `XOR`, `ANDI`, `ORI`, `XORI`
   - Shifts: `SLL`, `SRL`, `SRA`, `SLLI`, `SRLI`, `SRAI`
@@ -18,8 +18,8 @@ A single-cycle RISC-V processor written in Verilog, implementing the complete **
   - Branches: `BEQ`, `BNE`, `BLT`, `BGE`, `BLTU`, `BGEU`
   - Jumps: `JAL`, `JALR`
   - Upper immediates: `LUI`, `AUIPC`
-  - `FENCE`, `ECALL`, `EBREAK` — treated as NOPs
-- **Byte-granular memory** — load-store unit handles sub-word alignment with write strobes
+  - `FENCE`, `ECALL`, `EBREAK` treated as NOPs
+- **Byte-granular memory** - the load-store unit handles sub-word alignment with write strobes
 - **7 test programs** with automated pass/fail checking
 - **9 unit testbenches** for individual modules
 
@@ -37,7 +37,7 @@ The core is split into clean, single-responsibility modules:
 | `control_unit` | Decodes opcode into control signals |
 | `alu_decoder` | Picks ALU operation from funct3/funct7 |
 | `imm_gen` | Generates sign-extended immediates (I/S/B/U/J) |
-| `regfile` | 32×32-bit register file, x0 hardwired to zero |
+| `regfile` | 32x32-bit register file, x0 hardwired to zero |
 | `alu` | 11 operations: add, sub, shifts, comparisons, logic, pass-through |
 | `branch_unit` | Evaluates all six branch conditions |
 | `next_pc` | Chooses between PC+4, branch target, JAL, or JALR |
@@ -53,7 +53,7 @@ The core is split into clean, single-responsibility modules:
 
 ```
 rtl/           Synthesisable Verilog (the processor itself)
-tb/            Testbenches — 1 integration + 9 unit
+tb/            Testbenches - 1 integration + 9 unit
 sw/            Test programs: assembly (.s), machine code (.hex), expected results (.expect)
 docs/          Block diagrams and waveform screenshots
 sim/           Simulation outputs (generated, gitignored)
@@ -66,7 +66,7 @@ run_one.bat    Run a single test on Windows
 
 ### Prerequisites
 
-You just need [Icarus Verilog](http://iverilog.icarus.com/) — it's free and works on all platforms.
+You just need [Icarus Verilog](http://iverilog.icarus.com/). It's free and works on all platforms.
 
 - **Linux:** `sudo apt install iverilog` (Debian/Ubuntu) or `sudo pacman -S iverilog` (Arch)
 - **macOS:** `brew install icarus-verilog`
@@ -111,7 +111,7 @@ This saves a `.vcd` waveform file you can open in [GTKWave](http://gtkwave.sourc
 
 ### Example waveform
 
-Here's a snippet from the `p4_memcpy` test — you can see the PC advancing, instructions being fetched, and data memory writes happening:
+Here's a snippet from the `p4_memcpy` test showing the PC advancing, instructions being fetched, and data memory writes happening:
 
 ![Waveform from p4_memcpy](docs/waveform_p4_memcpy.png)
 
@@ -121,16 +121,16 @@ Here's a snippet from the `p4_memcpy` test — you can see the PC advancing, ins
 |---|---|---|---|
 | 1 | `arith_loop` | R-type and I-type arithmetic (ADD, SUB, shifts, SLT, etc.) | 18 |
 | 2 | `p1_arraysum` | Loops, array loads and stores | 163 |
-| 3 | `p2_gcd` | GCD algorithm — heavy branching | 52 |
-| 4 | `p3_fib` | Fibonacci sequence — memory + loops | 131 |
+| 3 | `p2_gcd` | GCD algorithm with heavy branching | 52 |
+| 4 | `p3_fib` | Fibonacci sequence using memory + loops | 131 |
 | 5 | `p4_memcpy` | Memory copy with byte-width loads and stores | 116 |
 | 6 | `p5_coverage` | All branch types, LUI, AUIPC, JAL, JALR, all load/store widths | 45 |
 | 7 | `p6_gapfill` | Register-operand shifts (SLL/SRL/SRA), SLTI, SLTIU, XORI | 14 |
 
 Each program has:
-- `.s` — commented RISC-V assembly source
-- `.hex` — machine code (loaded by `$readmemh`)
-- `.expect` — expected register and memory values, checked automatically by the testbench
+- `.s` - commented RISC-V assembly source
+- `.hex` - machine code (loaded by `$readmemh`)
+- `.expect` - expected register and memory values, checked automatically by the testbench
 
 ## How Testing Works
 
@@ -143,20 +143,18 @@ The integration testbench (`tb/tb_rv32i.v`) does the following:
 
 There are also 9 unit testbenches that test individual modules in isolation (ALU, branch unit, control unit, register file, etc.).
 
-## Contributing
+## Future Ideas
 
-Found a bug or want to add something? PRs are welcome.
-
-Some ideas for extending this:
-- **Pipeline it** — turn this into a 5-stage pipelined processor with hazard detection and forwarding
-- **Add CSRs** — implement the RISC-V Control and Status Registers for interrupt handling
-- **M extension** — add hardware multiply and divide (MUL, DIV, REM)
-- **FPGA synthesis** — target a real board (iCE40, Artix-7, etc.)
-- **Cache** — replace the simple memories with an instruction/data cache
+Some ways this could be extended:
+- **Pipeline it** - turn this into a 5-stage pipelined processor with hazard detection and forwarding
+- **Add CSRs** - implement the RISC-V Control and Status Registers for interrupt handling
+- **M extension** - add hardware multiply and divide (MUL, DIV, REM)
+- **FPGA synthesis** - target a real board (iCE40, Artix-7, etc.)
+- **Cache** - replace the simple memories with an instruction/data cache
 
 ## License
 
-MIT — see [LICENSE](LICENSE) for details.
+MIT - see [LICENSE](LICENSE) for details.
 
 ---
 
