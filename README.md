@@ -157,3 +157,7 @@ Some ideas for extending this:
 ## License
 
 MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+Built by [@Vanshikagupta100](https://github.com/Vanshikagupta100)
