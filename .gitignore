@@ -1,0 +1,16 @@
+# Simulation outputs
+sim/*.vvp
+sim/*.vcd
+sim/*.log
+
+# Dummy hex used to silence imem warnings in unit tests
+program.hex
+
+# Editor and OS junk
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

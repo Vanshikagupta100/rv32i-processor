@@ -1,0 +1,25 @@
+# Force consistent line endings
+* text=auto
+
+# Verilog / SystemVerilog
+*.v    text
+*.vh   text
+*.sv   text
+
+# Scripts
+*.bat  text eol=crlf
+Makefile text eol=lf
+
+# Assembly and hex
+*.s      text
+*.hex    text
+*.expect text
+
+# Images are binary
+*.png  binary
+*.jpg  binary
+*.gif  binary
+
+# Waveforms are binary
+*.vcd  binary
+*.vvp  binary
