@@ -1,0 +1,24 @@
+# P7 expected final state, derived by hand (not copied from a simulation)
+# x20 stays 0: both equal-operand branches (BGE, BGEU) are taken and skip their increments
+# x21 = 7  : BGE with -1 vs 1 is not taken, so the addi executes
+# x22 = 0  : BGEU with 0xFFFFFFFF vs 1 is taken, so the addi is skipped
+# x23,x24 = 1 : branch encodings with funct3 010/011 must not branch
+# JALR block starts at A = 0x44: x5 = A+17 = 0x55, x6 = A+12 = 0x50, x7 = A+16 = 0x54
+# x8 = x7 - x5 = -1, x9 = x5 - x6 = 5, x25 = 0 (poison instruction skipped)
+# x10 = 0x28 << 12 (LUI with a non-zero register number sitting in the rs1 field)
+R 1 00000005
+R 2 00000005
+R 3 ffffffff
+R 4 00000001
+R 5 00000055
+R 6 00000050
+R 7 00000054
+R 8 ffffffff
+R 9 00000005
+R 10 00028000
+R 20 00000000
+R 21 00000007
+R 22 00000000
+R 23 00000001
+R 24 00000001
+R 25 00000000

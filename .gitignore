@@ -1,9 +1,10 @@
 # Simulation outputs
-sim/*.vvp
-sim/*.vcd
-sim/*.log
+sim/
+*.vvp
+*.vcd
+*.log
 
-# Dummy hex used to silence imem warnings in unit tests
+# Default instruction-memory image (single NOP), only used if no INIT_FILE is given
 program.hex
 
 # Editor and OS junk
