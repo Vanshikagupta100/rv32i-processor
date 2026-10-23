@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/Vanshikagupta100/rv32i-processor/actions/workflows/ci.yml/badge.svg)](https://github.com/Vanshikagupta100/rv32i-processor/actions/workflows/ci.yml)
 
-A single-cycle RISC-V processor written in Verilog, implementing the complete **RV32I base integer instruction set**. Built as a learning project during the RISE cohort, developed with AI assistance for implementation, testbench design, and verification.
+A single-cycle RISC-V processor written in Verilog, implementing the complete **RV32I base integer instruction set**. Built as a hands-on learning project during the RISE cohort, focusing on clean modular RTL design, datapath integration, and automated verification.
 
 ![Top-level block diagram](docs/block_diagram_top.png)
 
